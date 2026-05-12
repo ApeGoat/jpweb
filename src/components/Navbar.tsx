@@ -13,7 +13,7 @@ export default function Navbar() {
                 { name: "ACCUEIL", path: "/" },
                 { name: "BIOGRAPHIE", path: "/biographie" },
                 { name: "CONFÉRENCES", path: "/conferences" },
-                { name: "PHOTOS", path: "/photos" },
+                { name: "GALLERIE", path: "/gallerie" },
             ]
             : [
                 { name: "HOME", path: "/en" },

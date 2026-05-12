@@ -13,7 +13,7 @@ export default function LanguageSelector() {
                 : location.pathname === "/en/conferences"
                     ? "/conferences"
                     : location.pathname === "/en/gallery"
-                        ? "/photos"
+                        ? "/gallerie"
                         : location.pathname;
 
     const enPath =
@@ -23,7 +23,7 @@ export default function LanguageSelector() {
                 ? "/en/biography"
                 : location.pathname === "/conferences"
                     ? "/en/conferences"
-                    : location.pathname === "/photos"
+                    : location.pathname === "/gallerie"
                         ? "/en/gallery"
                         : location.pathname;
 
