@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/jpweb/static/css/main.207a8219.css",
-    "main.js": "/jpweb/static/js/main.5d067b81.js",
+    "main.js": "/jpweb/static/js/main.55948867.js",
     "static/media/back.jpg": "/jpweb/static/media/back.ae75a5990ee78de40eb4.jpg",
     "static/media/2e-julie-payette-capcom-nasa-maman-jsc2003-00259-juliepayette-capcom-may-4-2003-min.jpg": "/jpweb/static/media/2e-julie-payette-capcom-nasa-maman-jsc2003-00259-juliepayette-capcom-may-4-2003-min.12605557d0ad045826ca.jpg",
     "static/media/16-cd-retour-celine-dion-20-may-mai-2019-min.jpg": "/jpweb/static/media/16-cd-retour-celine-dion-20-may-mai-2019-min.8d51ffa20de008c038fc.jpg",
@@ -48,10 +48,10 @@
     "static/media/25-logo-127-min.png": "/jpweb/static/media/25-logo-127-min.2473675947626ba0f610.png",
     "index.html": "/jpweb/index.html",
     "main.207a8219.css.map": "/jpweb/static/css/main.207a8219.css.map",
-    "main.5d067b81.js.map": "/jpweb/static/js/main.5d067b81.js.map"
+    "main.55948867.js.map": "/jpweb/static/js/main.55948867.js.map"
   },
   "entrypoints": [
     "static/css/main.207a8219.css",
-    "static/js/main.5d067b81.js"
+    "static/js/main.55948867.js"
   ]
 }
