@@ -2,14 +2,17 @@
 
 # dependencies
 /node_modules
+/frontend/node_modules
 /.pnp
 .pnp.js
 
 # testing
 /coverage
+/frontend/coverage
 
 # production
 /build
+/frontend/build
 
 # misc
 .DS_Store
@@ -17,6 +20,11 @@
 .env.development.local
 .env.test.local
 .env.production.local
+
+# backend / Docker
+/\.env
+/.env
+/backend/.env.local
 
 npm-debug.log*
 yarn-debug.log*
