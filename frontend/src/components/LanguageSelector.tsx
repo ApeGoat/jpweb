@@ -1,31 +1,13 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { getLanguageFromPath } from "../utils/language";
+import { getAlternateLanguagePath, getLanguageFromPath } from "../utils/language";
 
 export default function LanguageSelector() {
     const location = useLocation();
     const language = getLanguageFromPath(location.pathname);
 
-    const frPath =
-        location.pathname === "/en"
-            ? "/"
-            : location.pathname === "/en/biography"
-                ? "/biographie"
-                : location.pathname === "/en/conferences"
-                    ? "/conferences"
-                    : location.pathname === "/en/gallery"
-                        ? "/gallerie"
-                        : location.pathname;
-
-    const enPath =
-        location.pathname === "/"
-            ? "/en"
-            : location.pathname === "/biographie"
-                ? "/en/biography"
-                : location.pathname === "/conferences"
-                    ? "/en/conferences"
-                    : location.pathname === "/gallerie"
-                        ? "/en/gallery"
-                        : location.pathname;
+    const alternatePath = getAlternateLanguagePath(location.pathname);
+    const frPath = language === "fr" ? location.pathname : alternatePath;
+    const enPath = language === "en" ? location.pathname : alternatePath;
 
     return (
         <div

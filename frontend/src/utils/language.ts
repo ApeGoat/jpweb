@@ -9,11 +9,15 @@ export function getAlternateLanguagePath(pathname: string): string {
         "/": "/en",
         "/biographie": "/en/biography",
         "/conferences": "/en/conferences",
-        "/photos": "/en/gallery",
+        "/gallerie": "/en/gallery",
+        "/publications": "/en/publications",
+        "/contact": "/en/contact",
         "/en": "/",
         "/en/biography": "/biographie",
         "/en/conferences": "/conferences",
-        "/en/gallery": "/photos",
+        "/en/gallery": "/gallerie",
+        "/en/publications": "/publications",
+        "/en/contact": "/contact",
     };
 
     return pathMap[pathname] || "/";

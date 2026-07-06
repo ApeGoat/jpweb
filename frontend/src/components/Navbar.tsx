@@ -14,12 +14,16 @@ export default function Navbar() {
                 { name: "BIOGRAPHIE", path: "/biographie" },
                 { name: "CONFÉRENCES", path: "/conferences" },
                 { name: "GALLERIE", path: "/gallerie" },
+                { name: "PUBLICATIONS", path: "/publications" },
+                { name: "CONTACT", path: "/contact" },
             ]
             : [
                 { name: "HOME", path: "/en" },
                 { name: "BIOGRAPHY", path: "/en/biography" },
                 { name: "CONFERENCES", path: "/en/conferences" },
                 { name: "GALLERY", path: "/en/gallery" },
+                { name: "PUBLICATIONS", path: "/en/publications" },
+                { name: "CONTACT", path: "/en/contact" },
             ];
 
     return (
@@ -39,7 +43,7 @@ export default function Navbar() {
         >
             <LanguageSelector />
 
-            <div style={{ display: "flex", gap: "40px" }}>
+            <div className="navbar-links">
                 {links.map((link) => (
                     <NavLink
                         key={link.path}

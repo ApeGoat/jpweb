@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import Biography from "./pages/Biography";
 import Conferences from "./pages/Conferences";
 import Gallery from "./pages/Gallery";
+import Publications from "./pages/Publications";
+import Contact from "./pages/Contact";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import backImage from "./assets/back.jpg";
@@ -121,6 +123,10 @@ function App() {
                             </PageWrapper>
                         }
                     />
+                    <Route path="/publications" element={<PageWrapper><Publications /></PageWrapper>} />
+                    <Route path="/en/publications" element={<PageWrapper><Publications /></PageWrapper>} />
+                    <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+                    <Route path="/en/contact" element={<PageWrapper><Contact /></PageWrapper>} />
                 </Routes>
             </AnimatePresence>
         </div>

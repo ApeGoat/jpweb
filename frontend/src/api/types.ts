@@ -10,7 +10,9 @@ export interface Publication {
   title: string;
   description: string;
   type: string;
-  date: string;
+  date?: string;
+  publishedDate?: string;
+  url?: string;
   linkUrl?: string;
   videoUrl?: string;
   conferenceUrl?: string;
