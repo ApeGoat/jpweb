@@ -3,19 +3,23 @@ export interface GalleryItem {
   imageUrl: string;
   caption: string;
   altText: string;
+  displayOrder: number;
+  visible: boolean;
 }
+
+export type PublicationType = "ARTICLE" | "LINK" | "VIDEO" | "CONFERENCE" | "OTHER";
+export type PublicationStatus = "DRAFT" | "PUBLISHED" | "HIDDEN";
 
 export interface Publication {
   id: number;
   title: string;
   description: string;
-  type: string;
-  date?: string;
-  publishedDate?: string;
+  type: PublicationType;
+  publishedDate: string | null;
   url?: string;
-  linkUrl?: string;
-  videoUrl?: string;
-  conferenceUrl?: string;
+  thumbnailUrl?: string;
+  featured: boolean;
+  status: PublicationStatus;
 }
 
 export interface ContactFormData {
@@ -36,4 +40,6 @@ export type PublicationFormData = Omit<Publication, "id">;
 export interface GalleryUpdateData {
   caption: string;
   altText: string;
+  displayOrder: number;
+  visible: boolean;
 }

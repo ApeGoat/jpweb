@@ -8,6 +8,10 @@ import Contact from "./pages/Contact";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import backImage from "./assets/back.jpg";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminPublications from "./pages/admin/AdminPublications";
+import AdminGallery from "./pages/admin/AdminGallery";
 
 function PageWrapper({ children }: { children: React.ReactNode }) {
     return (
@@ -30,6 +34,7 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 
 function App() {
     const location = useLocation();
+    const isAdmin = location.pathname.startsWith("/admin");
 
     return (
         <div
@@ -47,7 +52,7 @@ function App() {
                 position: "relative",
             }}
         >
-            <Navbar />
+            {!isAdmin && <Navbar />}
 
             <AnimatePresence mode="wait">
                 <Routes location={location} key={location.pathname}>
@@ -127,6 +132,10 @@ function App() {
                     <Route path="/en/publications" element={<PageWrapper><Publications /></PageWrapper>} />
                     <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
                     <Route path="/en/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+                    <Route path="/admin/login" element={<AdminLogin />} />
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/publications" element={<AdminPublications />} />
+                    <Route path="/admin/gallery" element={<AdminGallery />} />
                 </Routes>
             </AnimatePresence>
         </div>

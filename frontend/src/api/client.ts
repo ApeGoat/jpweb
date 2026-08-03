@@ -9,7 +9,7 @@ import type {
 
 const DEFAULT_API_BASE_URL = "http://localhost:8080";
 const API_BASE_URL = (
-    import.meta.env?.VITE_API_BASE_URL || DEFAULT_API_BASE_URL
+    process.env.REACT_APP_API_BASE_URL || DEFAULT_API_BASE_URL
 ).replace(/\/$/, "");
 
 type RequestOptions = Omit<RequestInit, "body"> & {
@@ -81,9 +81,9 @@ export const api = {
         request<void>("/api/contact", { method: "POST", json: data }),
 
     login: (data: LoginRequest) =>
-        request<void>("/api/auth/login", {
+        request<{ username: string; message: string }>("/api/auth/login", {
             method: "POST",
-            admin: true,
+            credentials: "include",
             json: data,
         }),
 
@@ -110,8 +110,11 @@ export const api = {
             admin: true,
         }),
 
+    adminGetGallery: () =>
+        request<GalleryItem[]>("/api/admin/gallery", { admin: true }),
+
     adminUploadGalleryImage: (formData: FormData) =>
-        request<GalleryItem>("/api/admin/gallery", {
+        request<GalleryItem>("/api/admin/gallery/upload", {
             method: "POST",
             admin: true,
             body: formData,

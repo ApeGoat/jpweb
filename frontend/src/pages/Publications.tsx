@@ -40,11 +40,9 @@ export default function Publications() {
                     <div className="publication-list">
                         {items.map((item) => {
                             const links = [
-                                { url: item.linkUrl || item.url, label: content.link },
-                                { url: item.videoUrl, label: content.video },
-                                { url: item.conferenceUrl, label: content.conference },
+                                { url: item.url, label: item.type === "VIDEO" ? content.video : content.link },
                             ].filter((entry): entry is { url: string; label: string } => Boolean(entry.url));
-                            const date = item.date || item.publishedDate;
+                            const date = item.publishedDate;
                             return (
                                 <article key={item.id} className="publication-card">
                                     <div className="publication-meta"><span>{item.type}</span>{date && <time dateTime={date}>{formatDate(date, language)}</time>}</div>
