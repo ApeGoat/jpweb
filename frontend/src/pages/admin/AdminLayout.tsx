@@ -5,12 +5,12 @@ export default function AdminLayout({ title, children }: { title: string; childr
     return (
         <main className="admin-shell">
             <header className="admin-header">
-                <Link to="/admin" className="admin-brand">JP Admin</Link>
-                <nav aria-label="Admin navigation">
+                <Link to="/admin" className="admin-brand">Administration JP</Link>
+                <nav aria-label="Navigation de l’administration">
                     <NavLink to="/admin/publications">Publications</NavLink>
-                    <NavLink to="/admin/conferences">Conferences</NavLink>
-                    <NavLink to="/admin/gallery">Gallery</NavLink>
-                    <Link to="/">View website</Link>
+                    <NavLink to="/admin/conferences">Conférences</NavLink>
+                    <NavLink to="/admin/gallery">Galerie</NavLink>
+                    <Link to="/">Voir le site Web</Link>
                 </nav>
             </header>
             <section className="admin-content">

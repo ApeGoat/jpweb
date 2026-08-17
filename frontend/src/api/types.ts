@@ -22,11 +22,14 @@ export interface Publication {
   status: PublicationStatus;
 }
 
+export type CorrespondenceLanguage = "FR" | "EN";
+
 export interface ContactFormData {
   name: string;
   email: string;
   company?: string;
   inquiryType: string;
+  correspondenceLanguage: CorrespondenceLanguage | "";
   message: string;
 }
 

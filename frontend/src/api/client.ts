@@ -56,7 +56,7 @@ async function request<T>(
 
     if (admin && (response.status === 401 || response.status === 403)) {
         window.location.assign("/admin/login");
-        throw new ApiError("Unauthorized", response.status);
+        throw new ApiError("Non autorisé", response.status);
     }
 
     if (!response.ok) {

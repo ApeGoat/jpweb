@@ -35,7 +35,7 @@ export default function Home() {
                         marginBottom: "16px",
                     }}
                 >
-                    🇨🇦 <em>{content.motto}</em>
+                    <em>{content.motto}</em>
                 </motion.p>
 
                 <motion.h1
