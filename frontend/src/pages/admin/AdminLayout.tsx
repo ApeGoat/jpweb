@@ -8,6 +8,7 @@ export default function AdminLayout({ title, children }: { title: string; childr
                 <Link to="/admin" className="admin-brand">JP Admin</Link>
                 <nav aria-label="Admin navigation">
                     <NavLink to="/admin/publications">Publications</NavLink>
+                    <NavLink to="/admin/conferences">Conferences</NavLink>
                     <NavLink to="/admin/gallery">Gallery</NavLink>
                     <Link to="/">View website</Link>
                 </nav>

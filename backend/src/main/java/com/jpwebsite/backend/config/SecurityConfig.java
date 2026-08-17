@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/publications",
                                 "/api/publications/**",
+                                "/api/conferences",
                                 "/api/gallery",
                                 "/api/gallery/**",
                                 "/api/contact",

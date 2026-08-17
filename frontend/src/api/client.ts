@@ -1,5 +1,7 @@
 import type {
     ContactFormData,
+    Conference,
+    ConferenceFormData,
     GalleryItem,
     GalleryUpdateData,
     LoginRequest,
@@ -77,6 +79,8 @@ export const api = {
 
     getPublications: () => request<Publication[]>("/api/publications"),
 
+    getConferences: () => request<Conference[]>("/api/conferences"),
+
     submitContact: (data: ContactFormData) =>
         request<void>("/api/contact", { method: "POST", json: data }),
 
@@ -110,6 +114,29 @@ export const api = {
             admin: true,
         }),
 
+    adminGetConferences: () =>
+        request<Conference[]>("/api/admin/conferences", { admin: true }),
+
+    adminCreateConference: (data: ConferenceFormData) =>
+        request<Conference>("/api/admin/conferences", {
+            method: "POST",
+            admin: true,
+            json: data,
+        }),
+
+    adminUpdateConference: (id: number, data: ConferenceFormData) =>
+        request<Conference>(`/api/admin/conferences/${id}`, {
+            method: "PUT",
+            admin: true,
+            json: data,
+        }),
+
+    adminDeleteConference: (id: number) =>
+        request<void>(`/api/admin/conferences/${id}`, {
+            method: "DELETE",
+            admin: true,
+        }),
+
     adminGetGallery: () =>
         request<GalleryItem[]>("/api/admin/gallery", { admin: true }),
 
@@ -136,6 +163,8 @@ export const api = {
 
 export type {
     ContactFormData,
+    Conference,
+    ConferenceFormData,
     GalleryItem,
     GalleryUpdateData,
     LoginRequest,
