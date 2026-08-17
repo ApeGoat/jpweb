@@ -11,6 +11,7 @@ import backImage from "./assets/back.jpg";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPublications from "./pages/admin/AdminPublications";
+import AdminConferences from "./pages/admin/AdminConferences";
 import AdminGallery from "./pages/admin/AdminGallery";
 
 function PageWrapper({ children }: { children: React.ReactNode }) {
@@ -135,6 +136,7 @@ function App() {
                     <Route path="/admin/login" element={<AdminLogin />} />
                     <Route path="/admin" element={<AdminDashboard />} />
                     <Route path="/admin/publications" element={<AdminPublications />} />
+                    <Route path="/admin/conferences" element={<AdminConferences />} />
                     <Route path="/admin/gallery" element={<AdminGallery />} />
                 </Routes>
             </AnimatePresence>

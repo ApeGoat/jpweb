@@ -11,6 +11,9 @@ public class ContactInquiry {
     @Column(nullable = false, length = 320) private String email;
     private String company;
     @Column(name = "inquiry_type", length = 100) private String inquiryType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "correspondence_language", nullable = false, length = 2)
+    private CorrespondenceLanguage correspondenceLanguage;
     @Column(nullable = false, columnDefinition = "text") private String message;
     @Enumerated(EnumType.STRING) @Column(nullable = false) private InquiryStatus status;
     @Column(name = "created_at", nullable = false, updatable = false) private Instant createdAt;
@@ -26,6 +29,8 @@ public class ContactInquiry {
     public void setCompany(String company) { this.company = company; }
     public String getInquiryType() { return inquiryType; }
     public void setInquiryType(String inquiryType) { this.inquiryType = inquiryType; }
+    public CorrespondenceLanguage getCorrespondenceLanguage() { return correspondenceLanguage; }
+    public void setCorrespondenceLanguage(CorrespondenceLanguage correspondenceLanguage) { this.correspondenceLanguage = correspondenceLanguage; }
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
     public InquiryStatus getStatus() { return status; }
