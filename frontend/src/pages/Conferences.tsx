@@ -1,27 +1,49 @@
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { useLocation } from "react-router-dom";
-import conferencesEn from "../data/en/conferences";
-import conferencesFr from "../data/fr/conferences";
+import { api, type Conference } from "../api/client";
 import { getLanguageFromPath } from "../utils/language";
 
-function dateFromOffset(offset: number) {
-    const date = new Date();
-    date.setHours(0, 0, 0, 0);
-    date.setDate(date.getDate() + offset);
-    return date;
+const copy = {
+    en: { title: "CONFERENCES", upcoming: "Upcoming events", empty: "No upcoming events.", loading: "Loading events…", error: "Events could not be loaded.", link: "Learn more" },
+    fr: { title: "CONFÉRENCES", upcoming: "Événements à venir", empty: "Aucun événement à venir.", loading: "Chargement des événements…", error: "Impossible de charger les événements.", link: "En savoir plus" },
+};
+
+function parseCalendarDate(value: string) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+    const date = new Date(`${value}T00:00:00`);
+    return Number.isNaN(date.getTime()) ? null : date;
 }
 
 export default function Conferences() {
     const language = getLanguageFromPath(useLocation().pathname);
-    const content = language === "fr" ? conferencesFr : conferencesEn;
-    const today = dateFromOffset(0);
-    const endDate = dateFromOffset(7);
-    const upcomingEvents = content.events
-        .map((event) => ({ ...event, date: dateFromOffset(event.dayOffset) }))
-        .filter((event) => event.date >= today && event.date <= endDate)
-        .sort((a, b) => a.date.getTime() - b.date.getTime());
+    const content = copy[language];
+    const [items, setItems] = useState<Conference[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        let active = true;
+        setLoading(true);
+        setError(false);
+        api.getConferences()
+            .then((values) => { if (active) setItems(Array.isArray(values) ? values : []); })
+            .catch(() => { if (active) setError(true); })
+            .finally(() => { if (active) setLoading(false); });
+        return () => { active = false; };
+    }, []);
+
+    const upcomingEvents = useMemo(() => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return items
+            .map((event) => ({ event, date: parseCalendarDate(event.eventDate) }))
+            .filter((entry): entry is { event: Conference; date: Date } => Boolean(entry.date && entry.event.visible !== false && entry.date >= today))
+            .sort((a, b) => a.date.getTime() - b.date.getTime());
+    }, [items]);
+
     const dateFormatter = new Intl.DateTimeFormat(language === "fr" ? "fr-CA" : "en-CA", {
-        weekday: "short", month: "short", day: "numeric",
+        weekday: "short", year: "numeric", month: "short", day: "numeric",
     });
 
     return (
@@ -34,16 +56,20 @@ export default function Conferences() {
                     <motion.section className="events-calendar" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.3 }} aria-labelledby="upcoming-events-title">
                         <h2 id="upcoming-events-title">{content.upcoming}</h2>
                         <div className="events-list">
-                            {upcomingEvents.length === 0 ? <p className="page-message">{content.empty}</p> : upcomingEvents.map((event) => (
-                                <article className="event-card" key={`${event.dayOffset}-${event.title}`}>
-                                    <time dateTime={event.date.toISOString().slice(0, 10)}>{dateFormatter.format(event.date)}</time>
+                            {loading ? <p className="page-message">{content.loading}</p> : error ? <p className="page-message" role="alert">{content.error}</p> : upcomingEvents.length === 0 ? <p className="page-message">{content.empty}</p> : upcomingEvents.map(({ event, date }) => {
+                                const title = language === "fr" ? event.titleFr : event.titleEn;
+                                const description = language === "fr" ? event.descriptionFr : event.descriptionEn;
+                                const location = language === "fr" ? event.locationFr : event.locationEn;
+                                return <article className="event-card" key={event.id}>
+                                    <time dateTime={event.eventDate}>{dateFormatter.format(date)}</time>
                                     <div>
-                                        <h3>{event.title}</h3>
-                                        {event.description && <p>{event.description}</p>}
-                                        {event.location && <span>{event.location}</span>}
+                                        <h3>{title}</h3>
+                                        {description && <p>{description}</p>}
+                                        {location && <span>{location}</span>}
+                                        {event.url && <a className="event-link" href={event.url} target="_blank" rel="noreferrer">{content.link}</a>}
                                     </div>
-                                </article>
-                            ))}
+                                </article>;
+                            })}
                         </div>
                     </motion.section>
                 </div>

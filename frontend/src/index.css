@@ -55,6 +55,7 @@ html, body, #root {
 .event-card h3 { margin: 0 0 7px; font-size: 1.1rem; font-weight: 500; }
 .event-card p { margin: 0 0 8px; color: rgba(255,255,255,.75); font-size: .9rem; line-height: 1.45; }
 .event-card span { color: rgba(255,255,255,.58); font-size: .8rem; }
+.event-link { display: block; width: fit-content; margin-top: 10px; color: white; font-size: .8rem; font-weight: 700; text-underline-offset: 4px; }
 
 @media (max-width: 650px) {
     .content-page { padding: 150px 20px 40px; }
@@ -91,7 +92,7 @@ button:disabled { opacity: .55; cursor: not-allowed; }
 .admin-actions button.danger { background: #a93226; }
 .admin-message { padding: 14px 16px; border-radius: 7px; background: #d9edf3; }
 .admin-message.error { background: #f8d7da; color: #721c24; white-space: pre-wrap; }
-.admin-dashboard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.admin-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
 .admin-dashboard a { padding: 26px; border-radius: 12px; background: white; color: inherit; text-decoration: none; box-shadow: 0 8px 28px rgba(0,0,0,.08); }
 .admin-dashboard h2 { margin-top: 0; }
 .admin-list { display: grid; gap: 12px; }

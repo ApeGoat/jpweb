@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../api/client";
+import { api, ApiError } from "../../api/client";
 
 export default function AdminLogin() {
     const navigate = useNavigate();
@@ -19,7 +19,9 @@ export default function AdminLogin() {
             setState("success");
             navigate("/admin", { replace: true });
         } catch (reason) {
-            setError(reason instanceof Error ? reason.message : "Login failed.");
+            setError(reason instanceof ApiError && reason.status === 401
+                ? "Identifiants invalides."
+                : "Impossible de se connecter.");
             setState("error");
         }
     }
@@ -27,12 +29,12 @@ export default function AdminLogin() {
     return (
         <main className="admin-login">
             <form className="admin-form admin-login-card" onSubmit={submit}>
-                <h1>Admin login</h1>
-                <label>Username<input autoComplete="username" required value={username} onChange={(e) => setUsername(e.target.value)} /></label>
-                <label>Password<input type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} /></label>
+                <h1>Connexion administrateur</h1>
+                <label>Nom d’utilisateur<input autoComplete="username" required value={username} onChange={(e) => setUsername(e.target.value)} /></label>
+                <label>Mot de passe<input type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} /></label>
                 {state === "error" && <p className="admin-message error" role="alert">{error}</p>}
-                {state === "success" && <p className="admin-message" role="status">Login successful. Redirecting…</p>}
-                <button type="submit" disabled={state === "loading" || state === "success"}>{state === "loading" ? "Signing in…" : "Sign in"}</button>
+                {state === "success" && <p className="admin-message" role="status">Connexion réussie. Redirection…</p>}
+                <button type="submit" disabled={state === "loading" || state === "success"}>{state === "loading" ? "Connexion en cours…" : "Se connecter"}</button>
             </form>
         </main>
     );

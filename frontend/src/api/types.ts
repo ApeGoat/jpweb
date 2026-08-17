@@ -22,11 +22,14 @@ export interface Publication {
   status: PublicationStatus;
 }
 
+export type CorrespondenceLanguage = "FR" | "EN";
+
 export interface ContactFormData {
   name: string;
   email: string;
   company?: string;
   inquiryType: string;
+  correspondenceLanguage: CorrespondenceLanguage | "";
   message: string;
 }
 
@@ -36,6 +39,23 @@ export interface LoginRequest {
 }
 
 export type PublicationFormData = Omit<Publication, "id">;
+
+export interface Conference {
+  id: number;
+  titleEn: string;
+  titleFr: string;
+  descriptionEn?: string | null;
+  descriptionFr?: string | null;
+  locationEn?: string | null;
+  locationFr?: string | null;
+  eventDate: string;
+  url?: string | null;
+  visible: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type ConferenceFormData = Omit<Conference, "id" | "createdAt" | "updatedAt">;
 
 export interface GalleryUpdateData {
   caption: string;

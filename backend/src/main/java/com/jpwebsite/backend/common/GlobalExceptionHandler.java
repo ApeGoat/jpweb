@@ -1,10 +1,12 @@
 package com.jpwebsite.backend.common;
 
+import com.jpwebsite.backend.contact.ContactEmailDeliveryException;
 import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +24,11 @@ public class GlobalExceptionHandler {
         return error(HttpStatus.BAD_REQUEST, "Validation failed", fields);
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    ResponseEntity<ApiError> unreadableRequest(HttpMessageNotReadableException exception) {
+        return error(HttpStatus.BAD_REQUEST, "Invalid request body", Map.of());
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     ResponseEntity<ApiError> badCredentials(BadCredentialsException exception) {
         return error(HttpStatus.UNAUTHORIZED, "Invalid username or password", Map.of());
@@ -36,6 +43,11 @@ public class GlobalExceptionHandler {
     ResponseEntity<ApiError> responseStatus(ResponseStatusException exception) {
         HttpStatus status = HttpStatus.valueOf(exception.getStatusCode().value());
         return error(status, exception.getReason(), Map.of());
+    }
+
+    @ExceptionHandler(ContactEmailDeliveryException.class)
+    ResponseEntity<ApiError> contactEmailDelivery(ContactEmailDeliveryException exception) {
+        return error(HttpStatus.BAD_GATEWAY, "The message could not be delivered", Map.of());
     }
 
     @ExceptionHandler(Exception.class)

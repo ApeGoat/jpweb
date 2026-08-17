@@ -12,7 +12,12 @@ import org.springframework.web.server.ResponseStatusException;
 @Transactional(readOnly = true)
 public class ContactService {
     private final ContactInquiryRepository repository;
-    public ContactService(ContactInquiryRepository repository) { this.repository = repository; }
+    private final ContactEmailService emailService;
+
+    public ContactService(ContactInquiryRepository repository, ContactEmailService emailService) {
+        this.repository = repository;
+        this.emailService = emailService;
+    }
 
     @Transactional
     public ContactInquiryResponse submit(ContactRequest request) {
@@ -21,10 +26,11 @@ public class ContactService {
         inquiry.setEmail(request.email());
         inquiry.setCompany(request.company());
         inquiry.setInquiryType(request.inquiryType());
+        inquiry.setCorrespondenceLanguage(request.correspondenceLanguage());
         inquiry.setMessage(request.message());
         inquiry.setStatus(InquiryStatus.NEW);
         ContactInquiry saved = repository.save(inquiry);
-        // TODO Forward the inquiry by email after persistence, preferably through a durable queue/outbox.
+        emailService.send(request);
         return ContactInquiryResponse.from(saved);
     }
     public List<ContactInquiryResponse> list() {
