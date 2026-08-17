@@ -1,11 +1,9 @@
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Biography from "./pages/Biography";
 import Conferences from "./pages/Conferences";
 import Gallery from "./pages/Gallery";
 import Publications from "./pages/Publications";
-import Contact from "./pages/Contact";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import backImage from "./assets/back.jpg";
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -25,7 +23,7 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
                 position: "relative",
                 zIndex: 1,
                 width: "100%",
-                height: "100%",
+                minHeight: "100%",
             }}
         >
             {children}
@@ -41,7 +39,7 @@ function App() {
         <div
             style={{
                 width: "100%",
-                height: "100vh",
+                minHeight: "100vh",
                 backgroundImage: `
                   linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2)),
                   url(${backImage})
@@ -49,7 +47,7 @@ function App() {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                overflow: "hidden",
+                overflowX: "hidden",
                 position: "relative",
             }}
         >
@@ -81,22 +79,8 @@ function App() {
                             </PageWrapper>
                         }
                     />
-                    <Route
-                        path="/biographie"
-                        element={
-                            <PageWrapper>
-                                <Biography />
-                            </PageWrapper>
-                        }
-                    />
-                    <Route
-                        path="/en/biography"
-                        element={
-                            <PageWrapper>
-                                <Biography />
-                            </PageWrapper>
-                        }
-                    />
+                    <Route path="/biographie" element={<Navigate to="/#biography" replace />} />
+                    <Route path="/en/biography" element={<Navigate to="/en#biography" replace />} />
                     <Route
                         path="/conferences"
                         element={
@@ -131,8 +115,8 @@ function App() {
                     />
                     <Route path="/publications" element={<PageWrapper><Publications /></PageWrapper>} />
                     <Route path="/en/publications" element={<PageWrapper><Publications /></PageWrapper>} />
-                    <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-                    <Route path="/en/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+                    <Route path="/contact" element={<Navigate to="/#contact" replace />} />
+                    <Route path="/en/contact" element={<Navigate to="/en#contact" replace />} />
                     <Route path="/admin/login" element={<AdminLogin />} />
                     <Route path="/admin" element={<AdminDashboard />} />
                     <Route path="/admin/publications" element={<AdminPublications />} />
