@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import { motion } from "motion/react";
 import { useLocation } from "react-router-dom";
 import { api, type ContactFormData } from "../api/client";
 import { getLanguageFromPath } from "../utils/language";
@@ -10,7 +9,7 @@ const copy = {
 };
 const initialForm: ContactFormData = { name: "", email: "", company: "", inquiryType: "", correspondenceLanguage: "", message: "" };
 
-export default function Contact() {
+export default function Contact({ embedded = false }: { embedded?: boolean }) {
     const content = copy[getLanguageFromPath(useLocation().pathname)];
     const [form, setForm] = useState<ContactFormData>(initialForm);
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error" | "invalid">("idle");
@@ -25,9 +24,8 @@ export default function Contact() {
         catch { setStatus("error"); }
     };
 
-    return (
-        <main className="content-page">
-            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="content-panel contact-panel">
+    const contentNode = (
+            <div className="content-panel contact-panel">
                 <h1>{content.title}</h1>
                 <form onSubmit={submit} className="contact-form" noValidate>
                     <label>{content.name} *<input value={form.name} onChange={(e) => update("name", e.target.value)} required maxLength={255} /></label>
@@ -42,7 +40,7 @@ export default function Contact() {
                         {(status === "error" || status === "invalid") && <p role="alert" className="form-error">{status === "invalid" ? content.required : content.error}</p>}
                     </div>
                 </form>
-            </motion.div>
-        </main>
+            </div>
     );
+    return embedded ? contentNode : <main className="content-page">{contentNode}</main>;
 }

@@ -6,8 +6,9 @@ export default function LanguageSelector() {
     const language = getLanguageFromPath(location.pathname);
 
     const alternatePath = getAlternateLanguagePath(location.pathname);
-    const frPath = language === "fr" ? location.pathname : alternatePath;
-    const enPath = language === "en" ? location.pathname : alternatePath;
+    const sectionHash = (["/", "/en", "/jpweb/"].includes(location.pathname) ? location.hash : "");
+    const frPath = `${language === "fr" ? location.pathname : alternatePath}${sectionHash}`;
+    const enPath = `${language === "en" ? location.pathname : alternatePath}${sectionHash}`;
 
     return (
         <div
