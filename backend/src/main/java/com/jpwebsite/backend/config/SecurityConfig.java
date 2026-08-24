@@ -33,7 +33,8 @@ public class SecurityConfig {
                                 "/api/gallery",
                                 "/api/gallery/**",
                                 "/api/contact",
-                                "/api/auth/login"
+                                "/api/auth/login",
+                                "/api/auth/session"
                         ).permitAll()
                         .requestMatchers(
                                 "/api/admin/**",

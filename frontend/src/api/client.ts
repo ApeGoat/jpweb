@@ -18,6 +18,7 @@ type RequestOptions = Omit<RequestInit, "body"> & {
     admin?: boolean;
     body?: BodyInit;
     json?: unknown;
+    redirectOnUnauthorized?: boolean;
 };
 
 export class ApiError extends Error {
@@ -34,7 +35,14 @@ async function request<T>(
     path: string,
     options: RequestOptions = {},
 ): Promise<T> {
-    const { admin = false, body, headers, json, ...init } = options;
+    const {
+        admin = false,
+        body,
+        headers,
+        json,
+        redirectOnUnauthorized = true,
+        ...init
+    } = options;
     const requestHeaders = new Headers(headers);
     const requestBody = json === undefined ? body : JSON.stringify(json);
 
@@ -55,7 +63,9 @@ async function request<T>(
     const response = await fetch(`${API_BASE_URL}${path}`, fetchOptions);
 
     if (admin && (response.status === 401 || response.status === 403)) {
-        window.location.assign("/admin/login");
+        if (redirectOnUnauthorized) {
+            window.location.assign("/admin/login");
+        }
         throw new ApiError("Non autorisé", response.status);
     }
 
@@ -89,6 +99,12 @@ export const api = {
             method: "POST",
             credentials: "include",
             json: data,
+        }),
+
+    checkAdminSession: () =>
+        request<{ username: string; message: string }>("/api/auth/session", {
+            admin: true,
+            redirectOnUnauthorized: false,
         }),
 
     adminGetPublications: () =>

@@ -17,7 +17,7 @@ body { background: #101010; }
 .home-page { width: 100%; color: white; }
 .home-page > section { scroll-margin-top: 78px; }
 .hero-section { min-height: calc(100vh + 2px); min-height: calc(100svh + 2px); position: relative; overflow: hidden; box-sizing: border-box; background-image: url("./assets/hero-earth.jpg"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
-.hero-workmark { position: absolute; left: clamp(-220px, -14vw, -120px); bottom: -120px; width: clamp(620px, 55vw, 792px); height: auto; display: block; }
+.hero-workmark { position: absolute; left: clamp(-155px, calc(-120px - 2.43vw), -147px); bottom: -120px; width: clamp(620px, 55vw, 792px); height: auto; display: block; }
 .sr-only { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
 .landing-section { padding: clamp(3rem, 6vw, 6rem) clamp(24px, 7vw, 96px); background: rgba(5,5,5,.82); border-top: 1px solid rgba(255,255,255,.12); }
 .landing-section:nth-child(odd) { background: rgba(16,16,16,.88); }
@@ -108,7 +108,7 @@ body { background: #101010; }
 @media (max-width: 650px) {
     .public-navbar { --navbar-height: 72px; padding: 16px 18px; align-items: flex-start; }
     .hero-section { min-height: calc(100svh + 2px); background-position: 38% center; }
-    .hero-workmark { left: -120px; bottom: -70px; width: 520px; max-width: none; }
+    .hero-workmark { left: -93px; bottom: -70px; width: 520px; max-width: none; }
     .biography-section { background-position: 58% center; background-image: linear-gradient(90deg, rgba(0,0,0,.84), rgba(0,0,0,.52)), url("./assets/biography-montreal.jpg"); }
     .landing-section { padding: 56px 20px; }
     .carousel-image { height: 70vw; max-height: 390px; }
