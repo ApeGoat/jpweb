@@ -11,6 +11,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPublications from "./pages/admin/AdminPublications";
 import AdminConferences from "./pages/admin/AdminConferences";
 import AdminGallery from "./pages/admin/AdminGallery";
+import ProtectedAdminRoute from "./pages/admin/ProtectedAdminRoute";
 
 function PageWrapper({ children }: { children: React.ReactNode }) {
     return (
@@ -118,10 +119,12 @@ function App() {
                     <Route path="/contact" element={<Navigate to="/#contact" replace />} />
                     <Route path="/en/contact" element={<Navigate to="/en#contact" replace />} />
                     <Route path="/admin/login" element={<AdminLogin />} />
-                    <Route path="/admin" element={<AdminDashboard />} />
-                    <Route path="/admin/publications" element={<AdminPublications />} />
-                    <Route path="/admin/conferences" element={<AdminConferences />} />
-                    <Route path="/admin/gallery" element={<AdminGallery />} />
+                    <Route element={<ProtectedAdminRoute />}>
+                        <Route path="/admin" element={<AdminDashboard />} />
+                        <Route path="/admin/publications" element={<AdminPublications />} />
+                        <Route path="/admin/conferences" element={<AdminConferences />} />
+                        <Route path="/admin/gallery" element={<AdminGallery />} />
+                    </Route>
                 </Routes>
             </AnimatePresence>
         </div>

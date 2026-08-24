@@ -59,12 +59,6 @@ export default function Navbar() {
 
         const ratios = new Map<string, number>();
 
-        const sections = SECTION_IDS
-            .map((id) => document.getElementById(id))
-            .filter(
-                (section): section is HTMLElement => Boolean(section)
-            );
-
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) =>
@@ -87,9 +81,45 @@ export default function Navbar() {
             }
         );
 
-        sections.forEach((section) => observer.observe(section));
+        const observedSections = new Set<HTMLElement>();
 
-        return () => observer.disconnect();
+        const syncSections = () => {
+            const sections = new Set(
+                SECTION_IDS
+                    .map((id) => document.getElementById(id))
+                    .filter(
+                        (section): section is HTMLElement => Boolean(section)
+                    )
+            );
+
+            observedSections.forEach((section) => {
+                if (!sections.has(section)) {
+                    observer.unobserve(section);
+                    observedSections.delete(section);
+                    ratios.delete(section.id);
+                }
+            });
+
+            sections.forEach((section) => {
+                if (!observedSections.has(section)) {
+                    observer.observe(section);
+                    observedSections.add(section);
+                }
+            });
+        };
+
+        syncSections();
+
+        const sectionObserver = new MutationObserver(syncSections);
+        sectionObserver.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+
+        return () => {
+            sectionObserver.disconnect();
+            observer.disconnect();
+        };
     }, [location.pathname, onHome]);
 
     useEffect(() => {
