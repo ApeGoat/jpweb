@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "Site Futura";
+    src: local("Futura Bold"), local("Futura-Bold"), local("Futura PT Bold"), local("FuturaPT-Bold");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+:root { --headline-font: "Site Futura", Futura, "Futura PT", sans-serif; }
+
 html, body, #root {
     margin: 0;
     padding: 0;
@@ -8,6 +18,7 @@ html, body, #root {
 
 html { scroll-behavior: smooth; }
 body { background: #101010; }
+.public-navbar, nav, h1, h2, h3, h4, h5, h6, .section-heading > p { font-family: var(--headline-font); font-weight: 700; }
 .public-navbar { --navbar-opacity: 0; --navbar-height: 76px; position: fixed; top: 0; left: 0; width: 100%; min-height: var(--navbar-height); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; z-index: 40; box-sizing: border-box; background-color: rgba(0,0,0,var(--navbar-opacity)); transition: background-color 80ms linear; }
 .public-navbar--solid { --navbar-opacity: 1; }
 .public-navbar a { color: white; text-decoration: none; font-weight: 700; letter-spacing: .5px; }
@@ -24,7 +35,7 @@ body { background: #101010; }
 .landing-section > * { width: min(1100px, 100%); margin-left: auto; margin-right: auto; }
 .section-heading { margin-bottom: 24px; }
 .section-heading p { margin: 0 0 10px; color: rgba(255,255,255,.62); letter-spacing: .12em; text-transform: uppercase; }
-.section-heading h2, .biography-content h2, .contact-panel h1 { margin: 0 0 24px; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; }
+.section-heading h2, .biography-content h2, .contact-panel h1 { margin: 0 0 24px; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; }
 .biography-copy { max-width: 920px; }
 .biography-section { background-image: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.6) 52%, rgba(0,0,0,.32) 100%), url("./assets/biography-montreal.jpg"); background-size: cover; background-position: center center; background-repeat: no-repeat; }
 .biography-content { text-shadow: 0 1px 8px rgba(0,0,0,.8); }
@@ -44,9 +55,9 @@ body { background: #101010; }
 .preview-events { border: 1px solid rgba(255,255,255,.25); padding: 20px 26px; background: rgba(0,0,0,.28); }
 .gallery-page { scrollbar-width: none; -ms-overflow-style: none; }
 .gallery-page::-webkit-scrollbar { display: none; }
-.gallery-panel { width: min(1500px, 100%); max-width: 1500px; margin-inline: auto; }
-.gallery-grid { width: min(1500px, 100%); margin-inline: auto; columns: 4 260px; column-gap: 20px; padding-bottom: 40px; }
-.gallery-grid figure { margin: 0 0 20px; break-inside: avoid; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.4); }
+.content-panel.gallery-panel { width: 100%; max-width: none; margin-inline: auto; }
+.gallery-grid { width: 100%; margin-inline: auto; columns: 4 300px; column-gap: 28px; padding-bottom: 40px; }
+.gallery-grid figure { margin: 0 0 28px; break-inside: avoid; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.4); }
 .gallery-grid img { width: 100%; height: auto; display: block; }
 .gallery-grid figcaption { padding: 12px 14px; color: rgba(255,255,255,.78); line-height: 1.4; }
 .full-events { width: min(900px,100%); max-height: none; }
@@ -67,11 +78,11 @@ body { background: #101010; }
 
 .content-page { width: 100%; height: 100vh; color: white; overflow-y: auto; padding: 120px 80px 64px; box-sizing: border-box; }
 .content-panel { width: min(1050px, 100%); margin: 0; }
-.content-panel > h1 { margin: 0 0 32px; font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 300; }
+.content-panel > h1 { margin: 0 0 32px; font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 700; }
 .page-message { color: rgba(255,255,255,.82); font-weight: 300; }
 .publication-list { display: grid; gap: 18px; padding-bottom: 40px; }
 .publication-card { padding: 24px 28px; border: 1px solid rgba(255,255,255,.25); background: rgba(10,10,10,.48); backdrop-filter: blur(8px); }
-.publication-card h2 { margin: 10px 0; font-size: 1.45rem; font-weight: 500; }
+.publication-card h2 { margin: 10px 0; font-size: 1.45rem; font-weight: 700; }
 .publication-card p { margin: 0; color: rgba(255,255,255,.8); line-height: 1.6; white-space: pre-wrap; }
 .publication-meta { display: flex; gap: 16px; color: rgba(255,255,255,.65); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .publication-links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px; }
@@ -100,7 +111,7 @@ body { background: #101010; }
 .event-card { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.2); }
 .event-card:first-child { border-top: 0; padding-top: 0; }
 .event-card time { color: rgba(255,255,255,.65); font-size: .76rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-.event-card h3 { margin: 0 0 7px; font-size: 1.1rem; font-weight: 500; }
+.event-card h3 { margin: 0 0 7px; font-size: 1.1rem; font-weight: 700; }
 .event-card p { margin: 0 0 8px; color: rgba(255,255,255,.75); font-size: .9rem; line-height: 1.45; }
 .event-card span { color: rgba(255,255,255,.58); font-size: .8rem; }
 .event-link { display: block; width: fit-content; margin-top: 10px; color: white; font-size: .8rem; font-weight: 700; text-underline-offset: 4px; }
