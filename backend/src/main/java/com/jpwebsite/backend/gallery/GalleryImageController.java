@@ -21,6 +21,10 @@ public class GalleryImageController {
     public List<GalleryImageResponse> publicList() { return service.publicList(); }
     @GetMapping("/api/admin/gallery")
     public List<GalleryImageResponse> adminList() { return service.adminList(); }
+    @PutMapping("/api/admin/gallery/reorder")
+    public List<GalleryImageResponse> reorder(@RequestBody List<Long> ids) {
+        return service.reorder(ids);
+    }
     @PostMapping(value = "/api/admin/gallery/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<GalleryImageResponse> upload(@RequestPart("file") MultipartFile file,
             @RequestParam(required = false) @Size(max = 500) String caption,

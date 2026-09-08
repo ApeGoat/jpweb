@@ -57,3 +57,23 @@ The runner is safe to repeat: before uploading, it checks for the deterministic
 storage key in `gallery_images`. Existing rows are skipped, so subsequent runs
 do not upload or insert duplicates. Disable the runner by omitting the argument
 or setting `GALLERY_SEED_ENABLED=false`.
+
+### Gallery ordering regression tests
+
+The standard `mvn test` suite covers ID validation, metadata preservation and upload ordering.
+For PostgreSQL migration, commit/readback and rollback tests, start a disposable database:
+
+```sh
+docker run --rm -d --name jpweb-gallery-order-test -e POSTGRES_DB=gallery_test -e POSTGRES_USER=gallery_test -e POSTGRES_PASSWORD=gallery_test -p 127.0.0.1:55439:5432 postgres:16-alpine
+GALLERY_DATABASE_TEST=true mvn test
+# When finished:
+docker stop jpweb-gallery-order-test
+```
+
+In PowerShell, set `$env:GALLERY_DATABASE_TEST='true'` before running Maven.
+These opt-in tests use only the fixed disposable database on port 55439 and mock image storage.
+The reorder API accepts all gallery IDs (including hidden images) as a JSON array at
+`PUT /api/admin/gallery/reorder`, using the existing admin session. It rejects missing,
+unknown or duplicate IDs with HTTP 409. Ordering and gallery writes are serialized in
+PostgreSQL; public reads remain available. Migration V4 normalizes existing order values
+without changing URLs, keys, metadata or the existing newest-first tie order.

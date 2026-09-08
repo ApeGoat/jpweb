@@ -156,6 +156,11 @@ export const api = {
     adminGetGallery: () =>
         request<GalleryItem[]>("/api/admin/gallery", { admin: true }),
 
+    adminReorderGallery: (ids: number[]) =>
+        request<GalleryItem[]>("/api/admin/gallery/reorder", {
+            method: "PUT", admin: true, json: ids,
+        }),
+
     adminUploadGalleryImage: (formData: FormData) =>
         request<GalleryItem>("/api/admin/gallery/upload", {
             method: "POST",

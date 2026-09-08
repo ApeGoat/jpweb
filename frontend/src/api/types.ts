@@ -60,6 +60,5 @@ export type ConferenceFormData = Omit<Conference, "id" | "createdAt" | "updatedA
 export interface GalleryUpdateData {
   caption: string;
   altText: string;
-  displayOrder: number;
   visible: boolean;
 }
