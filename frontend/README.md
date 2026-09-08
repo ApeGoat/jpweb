@@ -2,6 +2,34 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Local Node and dependency setup
+
+Use Node **22.23.2 LTS** (recorded in `.nvmrc`) and its bundled npm 10.
+With nvm, run `nvm install 22.23.2` and `nvm use 22.23.2`.
+Use `npm ci` to install the versions in `package-lock.json`; avoid mixing npm and
+pnpm installations in the same `node_modules` directory.
+
+### Early development-server heap crash
+
+If startup fails with `FATAL ERROR: invalid table size` while compiling, stop the
+dev server and run:
+
+```sh
+npm run clean:cache
+npm start
+```
+
+This deletes only generated CRA/Webpack/Babel/ESLint/TypeScript caches under
+`frontend/node_modules/.cache`. It does not delete dependencies, source files,
+public assets, or image data. The next compilation rebuilds the cache.
+Also clear this cache after changing Node versions or package managers.
+
+The September 2026 incident was reproduced on Node 24.19.0 with the old Webpack
+`default-development` cache, and resolved on the same runtime by clearing it.
+Restoring that cache reproduced the crash with unchanged source and dependencies.
+A larger heap is not the fix. Node 22 is a reproducible local default, rather than
+a required downgrade to repair this cache failure. The dnd-kit packages remain installed.
+
 ## Available Scripts
 
 In the project directory, you can run:

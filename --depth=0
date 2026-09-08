@@ -1,0 +1,15 @@
+warning: in the working copy of 'frontend/package.json', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/frontend/package.json b/frontend/package.json[m
+[1mindex 7efb832..07a06b6 100644[m
+[1m--- a/frontend/package.json[m
+[1m+++ b/frontend/package.json[m
+[36m@@ -3,6 +3,9 @@[m
+   "version": "0.1.0",[m
+   "private": true,[m
+   "dependencies": {[m
+[32m+[m[32m    "@dnd-kit/core": "^6.3.1",[m
+[32m+[m[32m    "@dnd-kit/sortable": "^10.0.0",[m
+[32m+[m[32m    "@dnd-kit/utilities": "^3.2.2",[m
+     "@testing-library/dom": "^10.4.1",[m
+     "@testing-library/jest-dom": "^6.9.1",[m
+     "@testing-library/react": "^16.3.2",[m

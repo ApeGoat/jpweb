@@ -177,3 +177,10 @@ button:disabled { opacity: .55; cursor: not-allowed; }
     .admin-form-grid, .admin-dashboard { grid-template-columns: 1fr; }
     .admin-list article { align-items: flex-start; flex-direction: column; }
 }
+
+.admin-gallery-grid article.gallery-dragging { opacity: .65; z-index: 2; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+.admin-gallery-grid article.gallery-drop-target { outline: 3px solid #176a94; outline-offset: 3px; }
+.admin-gallery-grid .gallery-drag-handle { display: block; width: 100%; border: 0; padding: 10px 16px; text-align: left; background: #e9f0f5; color: #17364c; cursor: grab; touch-action: none; }
+.admin-gallery-grid .gallery-drag-handle:active { cursor: grabbing; }
+.admin-gallery-grid .gallery-drag-handle:focus-visible { outline: 3px solid #176a94; outline-offset: -3px; }
+.admin-gallery-grid .gallery-drag-handle:disabled { cursor: default; opacity: .5; }
