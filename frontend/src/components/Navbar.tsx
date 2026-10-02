@@ -25,7 +25,7 @@ export default function Navbar() {
             {name:"ACCUEIL",id:"home"},
             {name:"BIOGRAPHIE",id:"biography"},
             {name:"PUBLICATIONS",id:"publications"},
-            {name:"GALLERIE",id:"gallery"},
+            {name:"GALERIE",id:"gallery"},
             {name:"CONFÉRENCES",id:"conferences"},
             {name:"CONTACT",id:"contact"}
         ]
@@ -47,7 +47,7 @@ export default function Navbar() {
             const routeSection: Record<string, string> = {
                 "/publications": "publications",
                 "/en/publications": "publications",
-                "/gallerie": "gallery",
+                "/galerie": "gallery",
                 "/en/gallery": "gallery",
                 "/conferences": "conferences",
                 "/en/conferences": "conferences",

@@ -99,7 +99,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/gallerie"
+                        path="/galerie"
                         element={
                             <PageWrapper>
                                 <Gallery />

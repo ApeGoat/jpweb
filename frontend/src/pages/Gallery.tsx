@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { api, type GalleryItem } from "../api/client";
 import GalleryGrid from "../components/GalleryGrid";
 import { getLanguageFromPath } from "../utils/language";
-const copy = { fr: { title: "GALLERIE", loading: "Chargement de la galerie…", error: "Impossible de charger la galerie.", empty: "Aucune image n’est disponible." }, en: { title: "GALLERY", loading: "Loading gallery…", error: "The gallery could not be loaded.", empty: "No images are available." } };
+const copy = { fr: { title: "GALERIE", loading: "Chargement de la galerie…", error: "Impossible de charger la galerie.", empty: "Aucune image n’est disponible." }, en: { title: "GALLERY", loading: "Loading gallery…", error: "The gallery could not be loaded.", empty: "No images are available." } };
 export default function Gallery() {
  const language = getLanguageFromPath(useLocation().pathname); const content = copy[language]; const [items, setItems] = useState<GalleryItem[]>([]); const [state, setState] = useState<"loading" | "ready" | "error">("loading");
  useEffect(() => { let active = true; api.getGallery().then(v => { if (active) { setItems(v); setState("ready"); } }).catch(() => { if (active) setState("error"); }); return () => { active = false; }; }, []);

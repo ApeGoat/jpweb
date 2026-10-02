@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import Gallery from "./Gallery";
 import { api } from "../api/client";
-let mockPath = "/gallerie";
+let mockPath = "/galerie";
 jest.mock("react-router-dom", () => ({ useLocation: () => ({ pathname: mockPath }) }), { virtual: true });
 jest.mock("../api/client", () => ({ api: { getGallery: jest.fn() } }));
-test.each(["/gallerie", "/en/gallery"])("%s preserves the backend image order and URLs", async path => {
+test.each(["/galerie", "/en/gallery"])("%s preserves the backend image order and URLs", async path => {
     mockPath = path;
     (api.getGallery as jest.Mock).mockResolvedValue([
         { id: 2, imageUrl: "https://example.com/two", altText: "Second", caption: "Second" },

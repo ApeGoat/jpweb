@@ -1,5 +1,5 @@
 const galleryFr = {
-    title: "GALLERIE",
+    title: "GALERIE",
     close: "Fermer",
     loading: "Chargement de la galerie…",
     error: "Impossible de charger la galerie.",
